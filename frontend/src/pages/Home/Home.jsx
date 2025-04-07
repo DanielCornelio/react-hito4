@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Header/Header";
-import CardPizza from "../CardPizza/CardPizza";
+import Header from "../../components/Header/Header";
+import CardPizza from "../../components/CardPizza/CardPizza";
 import { Col, Container, Row } from "react-bootstrap";
 import { Toaster, toast } from 'react-hot-toast'
 

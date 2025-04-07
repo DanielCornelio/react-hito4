@@ -2,10 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   const total = 25000;
-  const token = true;
+  const token = false;
 
   return ( 
     <>
@@ -14,19 +15,19 @@ const NavBar = () => {
           <Navbar.Brand href="#home" className='text-light'>¡Pizzería Mamma Mía!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className='bg-light'/>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto py-3 py-lg-1 w-100" >
-              <Button className='me-lg-2 mb-2 mb-lg-0' variant="outline-secondary" href="#home">🍕 Home</Button>
+            <Nav className="me-auto py-3 py-lg-1 w-100 d-flex gap-3" >
+              <Link to='/' className='btn btn-outline-primary' href="#home">🍕 Home</Link>
               {token ? 
                 <>
-                  <Button className='me-lg-2 mb-2 mb-lg-0' variant="outline-secondary" href="#features">🧔🏻‍♂️ Profile</Button>
-                  <Button className='me-lg-2 mb-2 mb-lg-0' variant="outline-secondary" href="#pricing">🚪 Logout</Button>
+                  <Link to='/profile' className='btn btn-outline-primary' href="#features">🧔🏻‍♂️ Profile</Link>
+                  <Link to='/logout' className='btn btn-outline-primary' href="#pricing">🚪 Logout</Link>
                 </> : 
                 <>
-                  <Button className='me-lg-2 mb-2 mb-lg-0' variant="outline-secondary" href="#pricing">🔐 Login</Button>
-                  <Button className='me-lg-5 mb-2 mb-lg-0' variant="outline-secondary" href="#pricing">🔐 Register</Button>
+                  <Link to='/login' className='btn btn-outline-primary' href="#pricing">🔐 Login</Link>
+                  <Link to='/register' className='btn btn-outline-primary' href="#pricing">🔐 Register</Link>
                 </>
               }
-              <Button variant="outline-info" className='ms-lg-auto'  href="#pricing">🛒 Total: ${total.toLocaleString('es-CL')}</Button>
+              <Link to='/cart' className='btn btn-outline-info ms-lg-auto'  href="#pricing">🛒 Total: ${total.toLocaleString('es-CL')}</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
