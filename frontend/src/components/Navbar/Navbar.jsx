@@ -3,10 +3,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from '../../contexts/Context';
 
 const NavBar = () => {
   const total = 25000;
-  const token = false;
+  const token = true;
+
+  const {totalPrice} = useContext(Context)
 
   return ( 
     <>
@@ -27,7 +31,7 @@ const NavBar = () => {
                   <Link to='/register' className='btn btn-outline-primary' href="#pricing">🔐 Register</Link>
                 </>
               }
-              <Link to='/cart' className='btn btn-outline-info ms-lg-auto'  href="#pricing">🛒 Total: ${total.toLocaleString('es-CL')}</Link>
+              <Link to='/cart' className='btn btn-outline-info ms-lg-auto'  href="#pricing">🛒 Total: {totalPrice.toLocaleString('es-CL')}</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -35,5 +39,5 @@ const NavBar = () => {
     </>
    );
 }
- 
+
 export default NavBar;

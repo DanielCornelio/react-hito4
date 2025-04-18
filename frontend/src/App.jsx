@@ -9,11 +9,13 @@ import Pizza from './pages/Pizza/Pizza'
 import { Route, Routes } from 'react-router-dom'
 import NotFound from './components/NotFoud/NotFound'
 import Profile from './components/Profile/Profile'
+import ContextProvider from './contexts/Context'
 
 function App() {
 
   return (
     <div className='app'>
+      <ContextProvider>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -27,6 +29,7 @@ function App() {
         <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>
+      </ContextProvider>
     </div>
   )
 }

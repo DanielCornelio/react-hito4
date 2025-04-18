@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import {Card, ListGroup} from "react-bootstrap";
+import { Context } from "../../contexts/Context";
 
-const CardPizza = ({ name, price, ingredients, img }) => {
+const CardPizza = ({ name, price, ingredients, img, id}) => {
+  const { addToCart } = useContext(Context)
+  const pizza = { name, ingredients, price, img, id };
+
   return (
     <Card md={4}>
       <Card.Img src={img} />
@@ -27,7 +31,7 @@ const CardPizza = ({ name, price, ingredients, img }) => {
         </h5>
         <div className="d-flex justify-content-between">
           <Button variant="outline-secondary">Ver más 👀</Button>
-          <Button variant="dark">Añadir 🛒</Button>
+          <Button variant="dark" onClick={() => addToCart(pizza)}>Añadir 🛒</Button>
         </div>
       </Card.Body>
     </Card>
