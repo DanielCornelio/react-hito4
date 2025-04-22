@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Card, Button, ListGroup, Col, Row, Image } from 'react-bootstrap'
 import { Toaster, toast } from 'react-hot-toast'
+import { useParams } from 'react-router-dom'
 
 const Pizza = () => {
   const [info, setInfo] = useState({})
-  const { name, price, ingredients, img, desc } = info
+  const {id} = useParams();
 
+  console.log(useParams())
+  
   useEffect(() => {
     getData()
-  }, [])
+  }, [id])
 
 
   const getData = async () => {
-    const url = 'http://localhost:5000/api/pizzas/p001'
+    console.log(id)
+    const url = `http://localhost:6001/api/pizzas/${id}`
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -25,20 +29,21 @@ const Pizza = () => {
 
   return (
     <Container>
+      <Toaster/>
       <Row className='my-5'>
       <Col md={6}>
       <Card>
         <Card.Body>
-          <Card.Title className='capitalize'>{name}</Card.Title>
+          <Card.Title className='capitalize'>{info.name}</Card.Title>
           <Card.Text>
-            {desc}
+            {info.desc}
           </Card.Text>
           <Card.Text>
-            Precio: $ {price?.toLocaleString("es-CL")}
+            Precio: $ {info.price?.toLocaleString("es-CL")}
           </Card.Text>
           <ListGroup className='capitalize' variant="flush" as="ol" numbered>
 
-          {ingredients?.map((ingrediente, index) => (
+          {info.ingredients?.map((ingrediente, index) => (
               <ListGroup.Item key={index}>
                 🍕 {ingrediente}
               </ListGroup.Item>
@@ -49,7 +54,7 @@ const Pizza = () => {
       </Card>
       </Col>
       <Col md={6}>
-      <Image src={img} rounded />
+      <Image src={info.img} rounded />
       </Col>
       </Row>
     </Container>

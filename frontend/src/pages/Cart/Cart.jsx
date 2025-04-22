@@ -6,33 +6,6 @@ import { Context } from '../../contexts/Context'
 
 const Cart = () => {
   const {cart, incrementar, disminuir, totalPrice} = useContext(Context)
-  // const [cart, setCart] = useState(pizzaCart)
-
-  // const incremetar = (id) => {
-  //   const updatedCart = cart.map((pizza) => {
-  //     if (pizza.id === id) {
-  //       return { ...pizza, count: pizza.count + 1 };
-  //     }
-  //     return pizza;
-  //   });
-  //   setCart(updatedCart);
-  // };
-
-  // const disminuir = (id) => {
-  //   const updatedCart = cart
-  //     .map((pizza) => {
-  //       if (pizza.id === id && pizza.count > 0) {
-  //         return { ...pizza, count: pizza.count - 1 };
-  //       }
-  //       return pizza;
-  //     })
-  //     .filter((pizza) => pizza.count > 0);
-  //   setCart(updatedCart);
-  // };
-
-  // const totalPrice = cart.reduce((total, pizza) => {
-  //   return total + pizza.price * pizza.count;
-  // }, 0);
 
   return (
     <div className="my-5 app">

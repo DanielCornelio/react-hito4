@@ -13,7 +13,7 @@ const Home = () => {
   }, [])
 
   const getData = async () => {
-    const url = "http://localhost:5000/api/pizzas"
+    const url = "http://localhost:6001/api/pizzas"
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -32,7 +32,7 @@ const Home = () => {
           {
             info.map((pizza) => (
               <Col md={4} key={pizza.id}>
-                <CardPizza name={pizza.name} price={pizza.price} ingredients={pizza.ingredients} img={pizza.img} />
+                <CardPizza id={pizza.id} name={pizza.name} price={pizza.price} ingredients={pizza.ingredients} img={pizza.img} />
               </Col>
             ))
           }

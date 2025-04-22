@@ -2,16 +2,22 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import {Card, ListGroup} from "react-bootstrap";
 import { Context } from "../../contexts/Context";
+import { useNavigate } from "react-router-dom";
 
 const CardPizza = ({ name, price, ingredients, img, id}) => {
   const { addToCart } = useContext(Context)
   const pizza = { name, ingredients, price, img, id };
+  const navigate = useNavigate();
+  const irAPizza = () => {
+    navigate(`/pizza/${id}`)
+  }
+
 
   return (
     <Card md={4}>
       <Card.Img src={img} />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>{name} - {id}</Card.Title>
         <hr />
         <Card.Subtitle className="text-muted text-center mb-3">
         🍕 Ingredientes:
@@ -30,7 +36,7 @@ const CardPizza = ({ name, price, ingredients, img, id}) => {
           Precio: $ {price.toLocaleString("es-CL")}
         </h5>
         <div className="d-flex justify-content-between">
-          <Button variant="outline-secondary">Ver más 👀</Button>
+          <Button variant="outline-secondary" onClick={irAPizza} >Ver más 👀</Button>
           <Button variant="dark" onClick={() => addToCart(pizza)}>Añadir 🛒</Button>
         </div>
       </Card.Body>

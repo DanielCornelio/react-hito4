@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, use, useState } from "react";
 import { pizzaCart } from "../data/pizzas";
+import { useParams } from "react-router-dom";
 
 export const Context = createContext();
 
@@ -50,7 +51,7 @@ const ContextProvider =  ( {children} ) => {
         disminuir,
         totalPrice,
         cart,
-        addToCart
+        addToCart,
       }
 
       return <Context.Provider value={globalState}>{children}</Context.Provider>
