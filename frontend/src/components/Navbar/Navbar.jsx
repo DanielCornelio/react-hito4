@@ -4,13 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { Context } from '../../contexts/Context';
+import { CartContext } from '../../contexts/CartContext';
+import { UserContex } from '../../contexts/UserContext';
 
 const NavBar = () => {
   const total = 25000;
-  const token = true;
 
-  const {totalPrice} = useContext(Context)
+  const {totalPrice} = useContext(CartContext)
+  const {token, logout} = useContext(UserContex)
 
   return ( 
     <>
@@ -24,7 +25,7 @@ const NavBar = () => {
               {token ? 
                 <>
                   <Link to='/profile' className='btn btn-outline-primary' href="#features">🧔🏻‍♂️ Profile</Link>
-                  <Link to='/logout' className='btn btn-outline-primary' href="#pricing">🚪 Logout</Link>
+                  <button className='btn btn-outline-primary' href="#pricing" onClick={logout}>🚪 Logout</button>
                 </> : 
                 <>
                   <Link to='/login' className='btn btn-outline-primary' href="#pricing">🔐 Login</Link>

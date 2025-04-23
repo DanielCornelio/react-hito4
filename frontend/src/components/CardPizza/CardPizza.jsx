@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import {Card, ListGroup} from "react-bootstrap";
-import { Context } from "../../contexts/Context";
+import { CartContext } from "../../contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 
 const CardPizza = ({ name, price, ingredients, img, id}) => {
-  const { addToCart } = useContext(Context)
+  const { addToCart } = useContext(CartContext)
   const pizza = { name, ingredients, price, img, id };
   const navigate = useNavigate();
   const irAPizza = () => {
@@ -17,7 +17,7 @@ const CardPizza = ({ name, price, ingredients, img, id}) => {
     <Card md={4}>
       <Card.Img src={img} />
       <Card.Body>
-        <Card.Title>{name} - {id}</Card.Title>
+        <Card.Title>{name}</Card.Title>
         <hr />
         <Card.Subtitle className="text-muted text-center mb-3">
         🍕 Ingredientes:

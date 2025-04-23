@@ -6,31 +6,33 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
 import Pizza from './pages/Pizza/Pizza'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import NotFound from './components/NotFoud/NotFound'
 import Profile from './components/Profile/Profile'
-import ContextProvider from './contexts/Context'
+import { useContext } from 'react'
+import { UserContex } from './contexts/UserContext'
+
 
 function App() {
+  const {token} = useContext(UserContex)
 
   return (
     <div className='app'>
-      <ContextProvider>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={token ? <Navigate to='/'/> : <Register/>}/>
+        <Route path='/login' element={token ? <Navigate to='/'/> : <Login/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/pizza/:id' element={<Pizza/>}/>
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile' element={token?<Profile/> : <Navigate to='/login'/>}/>
         <Route path='/404' element={<NotFound/>}/>
 
 
         <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>
-      </ContextProvider>
+      
     </div>
   )
 }

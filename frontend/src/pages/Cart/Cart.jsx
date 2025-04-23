@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react'
 import { pizzaCart } from '../../data/pizzas'
 import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap'
 import './Cart.css'
-import { Context } from '../../contexts/Context'
+import { CartContext } from '../../contexts/CartContext'
+import { UserContex } from '../../contexts/UserContext'
 
 const Cart = () => {
-  const {cart, incrementar, disminuir, totalPrice} = useContext(Context)
-
+  const {cart, incrementar, disminuir, totalPrice} = useContext(CartContext)
+  const {token} = useContext(UserContex);
   return (
     <div className="my-5 app">
       <Container>
@@ -32,7 +33,7 @@ const Cart = () => {
               }
             </ListGroup>
             <h3>Total:$ {totalPrice.toLocaleString("es-CL")}</h3>
-            <Button variant='dark'>Pagar</Button>
+            {token && <Button variant='dark'>Pagar</Button>}
           </Col>
         </Row>
       </Container>

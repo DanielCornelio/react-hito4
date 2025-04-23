@@ -1,10 +1,9 @@
 import { createContext, use, useState } from "react";
 import { pizzaCart } from "../data/pizzas";
-import { useParams } from "react-router-dom";
 
-export const Context = createContext();
+export const CartContext = createContext();
 
-const ContextProvider =  ( {children} ) => {
+const CartProvider =  ( {children} ) => {
     const [cart, setCart] = useState(pizzaCart)
     
       const incrementar = (id) => {
@@ -54,7 +53,7 @@ const ContextProvider =  ( {children} ) => {
         addToCart,
       }
 
-      return <Context.Provider value={globalState}>{children}</Context.Provider>
+      return <CartContext.Provider value={globalState}>{children}</CartContext.Provider>
 }
 
-export default ContextProvider;
+export default CartProvider;
