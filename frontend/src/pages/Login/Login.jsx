@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, Row } from "react-bootstrap";
 import { Toaster, toast } from 'react-hot-toast'
+import axios from 'axios'
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -38,17 +39,39 @@ const Login = () => {
 
     const handleChange = (e)=>{
         setUser({...user, [e.target.name]:e.target.value})
-        console.log(user)
+
     }
 
-    const handleResult = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault()
         if(validateField()){
-            toast.success('Datos correctos')
+            try {
+                await auth(user.email, user.password);
+                toast.success('Datos correctos');
+                // Redirige a otra página (ej: usando react-router)
+                // navigate('/dashboard');
+              } catch (error) {
+                toast.error('Error al iniciar sesión. Verifica tus credenciales.');
+              }
+        }
+    }
+
+    const auth = async (userEmail, userPassword) =>{
+        try {
+            const URL = 'http://localhost:5001/api/auth/login';
+            const payload = {email: userEmail , password: userPassword};
+            const response = await axios.post(URL, payload)
+            console.log({response})
+            localStorage.setItem('token', response.data.token);
+            console.log('user', response.data)
+            return response
+        } catch (error) {
+            console.log(error)
+            throw error;
         }
     }
     return (
-        <Form className="my-5 app" onSubmit={handleResult} >
+        <Form className="my-5 app" onSubmit={handleSubmit} >
             <Container>
                 <Row className="justify-content-md-center">
                     <Col md={7} className="center">
