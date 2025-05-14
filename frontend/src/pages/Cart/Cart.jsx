@@ -6,7 +6,7 @@ import { CartContext } from '../../contexts/CartContext'
 import { UserContex } from '../../contexts/UserContext'
 
 const Cart = () => {
-  const {cart, incrementar, disminuir, totalPrice, cartCheckout} = useContext(CartContext)
+  const {cart, incrementar, disminuir, totalPrice, cartCheckout, checkoutSuccess} = useContext(CartContext)
   const {token} = useContext(UserContex);
   
   const handlePay = async() =>{
@@ -21,6 +21,7 @@ const Cart = () => {
             <h3>Detalles del Pedidio:</h3>
             <ListGroup >
               {
+                cart.length >= 1 ?
                 cart.map((pizza) => (
                   <ListGroup.Item key={pizza.id} className='d-flex gap-5'>
                     <Col md={6} className='d-flex gap-4 align-items-center justify-content-md-start'>
@@ -34,11 +35,14 @@ const Cart = () => {
                       <Button variant="outline-primary" onClick={() => incrementar(pizza.id)}>+</Button>
                     </Col>
                   </ListGroup.Item>
-                ))
+                )):
+                <h3>El carrito se encuentra vacío</h3>
               }
             </ListGroup>
             <h3>Total:$ {totalPrice.toLocaleString("es-CL")}</h3>
             {token && <Button variant='dark' onClick={handlePay}>Pagar</Button>}
+
+            {checkoutSuccess && <div className='text-center'>Se ha realizado la compra con exito</div>}
           </Col>
         </Row>
       </Container>

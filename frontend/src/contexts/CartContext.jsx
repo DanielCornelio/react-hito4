@@ -6,6 +6,7 @@ export const CartContext = createContext();
 
 const CartProvider =  ( {children} ) => {
     const [cart, setCart] = useState(pizzaCart)
+    const [checkoutSuccess, setCheckoutSuccess] = useState(null);
     const {token} = useContext(UserContex)
     
       const incrementar = (id) => {
@@ -76,7 +77,8 @@ const CartProvider =  ( {children} ) => {
         totalPrice,
         cart,
         addToCart,
-        cartCheckout
+        cartCheckout,
+        checkoutSuccess
       }
 
       return <CartContext.Provider value={globalState}>{children}</CartContext.Provider>
