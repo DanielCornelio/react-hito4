@@ -43,7 +43,8 @@ const CartProvider =  ( {children} ) => {
           setCart([...cart, producto]);
         }
       };
-    
+      
+      const clearCart = () => setCart([])
 
       const globalState = {
         incrementar,
@@ -51,6 +52,7 @@ const CartProvider =  ( {children} ) => {
         totalPrice,
         cart,
         addToCart,
+        clearCart
       }
 
       return <CartContext.Provider value={globalState}>{children}</CartContext.Provider>

@@ -6,8 +6,12 @@ import { CartContext } from '../../contexts/CartContext'
 import { UserContex } from '../../contexts/UserContext'
 
 const Cart = () => {
-  const {cart, incrementar, disminuir, totalPrice} = useContext(CartContext)
+  const {cart, incrementar, disminuir, totalPrice, clearCart} = useContext(CartContext)
   const {token} = useContext(UserContex);
+  const handlePay = () =>{
+    clearCart()
+  }
+
   return (
     <div className="my-5 app">
       <Container>
@@ -33,7 +37,7 @@ const Cart = () => {
               }
             </ListGroup>
             <h3>Total:$ {totalPrice.toLocaleString("es-CL")}</h3>
-            {token && <Button variant='dark'>Pagar</Button>}
+            {token && <Button variant='dark' onClick={handlePay}>Pagar</Button>}
           </Col>
         </Row>
       </Container>
