@@ -1,10 +1,12 @@
-import { createContext, use, useState } from "react";
+import { createContext,  useContext,  useState } from "react";
 import { pizzaCart } from "../data/pizzas";
+import { UserContex } from "./UserContext";
 
 export const CartContext = createContext();
 
 const CartProvider =  ( {children} ) => {
     const [cart, setCart] = useState(pizzaCart)
+    const {token} = useContext(UserContex)
     
       const incrementar = (id) => {
         const updatedCart = cart.map((pizza) => {
@@ -44,7 +46,29 @@ const CartProvider =  ( {children} ) => {
         }
       };
       
-      const clearCart = () => setCart([])
+      const cartCheckout = async () => {
+        const response = await fetch("http://localhost:5001/api/checkouts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            cart: cart,
+          }),
+        });
+        
+        let data = await response.json();
+        console.log('dataCart', data);
+        if (data.message == 'Checkout successful') {
+          setCart([]);
+          setCheckoutSuccess(true);
+          //alert('Pago exitoso!!')   
+        } else {
+          setCheckoutSuccess(false);
+          alert(data?.error || data.message);
+        }
+      };
 
       const globalState = {
         incrementar,
@@ -52,7 +76,7 @@ const CartProvider =  ( {children} ) => {
         totalPrice,
         cart,
         addToCart,
-        clearCart
+        cartCheckout
       }
 
       return <CartContext.Provider value={globalState}>{children}</CartContext.Provider>

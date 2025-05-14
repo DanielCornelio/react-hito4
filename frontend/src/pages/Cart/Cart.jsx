@@ -6,10 +6,11 @@ import { CartContext } from '../../contexts/CartContext'
 import { UserContex } from '../../contexts/UserContext'
 
 const Cart = () => {
-  const {cart, incrementar, disminuir, totalPrice, clearCart} = useContext(CartContext)
+  const {cart, incrementar, disminuir, totalPrice, cartCheckout} = useContext(CartContext)
   const {token} = useContext(UserContex);
-  const handlePay = () =>{
-    clearCart()
+  
+  const handlePay = async() =>{
+    await cartCheckout()
   }
 
   return (
