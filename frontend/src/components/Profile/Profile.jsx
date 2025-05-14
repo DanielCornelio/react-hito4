@@ -1,16 +1,29 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { UserContex } from '../../contexts/UserContext'
 const Profile = () => {
+  const {user, logout} = useContext(UserContex)
+  
   return (
     <>
-    <Container className="pt-5 mt-5">
+    {
+      user
+      ?(
+        <Container className="pt-5 mt-5">
       <h1>Profile</h1>
       
-      <h6 className="mt-5">test@test.com</h6>
+      <h6 className="mt-5">{user?.email}</h6>
 
-      <Link to='/' className='btn btn-primary' variant="outline-secondary" >🚪 Cerrar Sesión</Link>
+      <Link className='btn btn-primary' variant="outline-secondary" onClick={()=>logout()} >🚪 Cerrar Sesión</Link>
     </Container> 
+      ):(
+      <h6 className="mt-5">sin datos</h6>
+        
+      )
+    }
+    
   </>
   )
 }

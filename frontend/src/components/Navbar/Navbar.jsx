@@ -11,7 +11,7 @@ const NavBar = () => {
   const total = 25000;
 
   const {totalPrice} = useContext(CartContext)
-  const {token, logout} = useContext(UserContex)
+  const { logout, token} = useContext(UserContex)
 
   return ( 
     <>
@@ -25,7 +25,7 @@ const NavBar = () => {
               {token ? 
                 <>
                   <Link to='/profile' className='btn btn-outline-primary' href="#features">🧔🏻‍♂️ Profile</Link>
-                  <button className='btn btn-outline-primary' href="#pricing" onClick={logout}>🚪 Logout</button>
+                  <button className='btn btn-outline-primary' href="#pricing" onClick={()=>logout()}>🚪 Logout</button>
                 </> : 
                 <>
                   <Link to='/login' className='btn btn-outline-primary' href="#pricing">🔐 Login</Link>

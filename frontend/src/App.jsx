@@ -25,7 +25,7 @@ function App() {
         <Route path='/login' element={token ? <Navigate to='/'/> : <Login/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/pizza/:id' element={<Pizza/>}/>
-        <Route path='/profile' element={token?<Profile/> : <Navigate to='/login'/>}/>
+        <Route path='/profile' element={token ? <Profile/> : <Navigate to='/login'/>}/>
         <Route path='/404' element={<NotFound/>}/>
 
 
