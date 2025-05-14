@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
 
     const auth = async (email, password) => {
         try {
-            const response = await fetch('http://localhost:5001/api/auth/login',
+            const response = await fetch('http://localhost:5000/api/auth/login',
                 {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -65,7 +65,7 @@ const UserProvider = ({ children }) => {
 
       const register = async ( email, password ) => {
         try {
-          const res = await fetch("http://localhost:5001/api/auth/register", {
+          const res = await fetch("http://localhost:5000/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),

@@ -16,7 +16,7 @@ const Pizza = () => {
 
   const getData = async () => {
     console.log(id)
-    const url = `http://localhost:5001/api/pizzas/${id}`
+    const url = `http://localhost:5000/api/pizzas/${id}`
     try {
       const response = await fetch(url);
       const data = await response.json();
